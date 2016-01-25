@@ -1,0 +1,183 @@
+* {
+    color: inherit;
+    text-decoration: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Lato", "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.dragging {
+    background: #EEE;
+}
+
+/* ------ Title ------ */
+
+.title-bar {
+    display: block;
+
+    background: -moz-linear-gradient(top, rgba(142,198,255,1) 0%, rgba(96,171,248,1) 26%, rgba(64,150,238,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(142,198,255,1)), color-stop(26%,rgba(96,171,248,1)), color-stop(100%,rgba(64,150,238,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, rgba(142,198,255,1) 0%,rgba(96,171,248,1) 26%,rgba(64,150,238,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, rgba(142,198,255,1) 0%,rgba(96,171,248,1) 26%,rgba(64,150,238,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, rgba(142,198,255,1) 0%,rgba(96,171,248,1) 26%,rgba(64,150,238,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom, rgba(142,198,255,1) 0%,rgba(96,171,248,1) 26%,rgba(64,150,238,1) 100%); /* W3C */
+
+    h1 {
+        width: 940px;
+        margin: 0 auto;
+        display: block;
+        font-size: 24px;
+        line-height: 32px;
+        color: white;
+    }
+}
+
+.emulator {
+    display: block;
+    width: 940px;
+    margin: 0 auto;
+    padding: 10px 0;
+}
+
+/* ------ Gameboy display objects ------- */
+.display {
+    $gameboy-width: 320px;
+    $gameboy-height: 537px;
+    $screen-width: 160px;
+    $screen-height: 144px;
+    $screen-y: 57px;
+
+    position: absolute;
+    padding: ($screen-y) floor(($gameboy-width - $screen-width) / 2) ($gameboy-height - $screen-height - $screen-y);
+
+    display: inline-block;
+    background: url('media/gameboy.png');
+
+    width: $screen-width;
+    height: $screen-height;
+
+    &.double {
+        width: $screen-width * 2;
+        height: $screen-height * 2;
+
+        padding: 0 floor($gameboy-width / 2 - $screen-width) ($gameboy-height - $screen-height * 2);
+    }
+}
+
+.button-group {
+    padding: 0 0 10px;
+    margin: 0 0 0 340px;
+
+    font-size: 0;
+
+    li {
+        display: inline-block;
+        border-radius: 5px;
+        background: #49E;
+        border-bottom: 2px solid darken(#49E, 20%);
+        color: #fff;
+        padding: 0 10px;
+        margin: 0 5px 0 0;
+        line-height: 20px;
+        font-size: 12px;
+        cursor: pointer;
+        cursor: hand;
+        vertical-align: middle;
+    }
+}
+
+.debugger {
+    $disasm-lines: 25;
+
+    display: block;
+
+    border: 1px solid #ddd;
+    box-shadow: 0 1px 3px 0 rgba(#000,0.15);
+    padding: 0;
+    margin: 0 0 0 340px;
+    border-radius: 5px;
+    overflow: hidden;
+
+    font-family: Courier, monospace;
+
+    .registers {
+        display: inline-block;
+        vertical-align: top;
+
+        padding: 0;
+
+        min-height: $disasm-lines * 20px;
+        background: #eee;
+
+        .header {
+            font-family: "Lato", "Helvetica Neue", Helvetica, sans-serif;
+            font-size: 14px;
+            display: block;
+            vertical-align: middle;
+            line-height: 24px;
+            text-align: center;
+            background: #D553D5;
+            color: #fff;
+        }
+
+        .column {
+            display: inline-block;
+            padding: 0 4px;
+            text-align: right;
+        }
+
+        .name {
+            display: inline-block;
+            width: 2em;
+        }
+
+        .value, .flag {
+            display: inline-block;
+            background: #DDD;
+        }
+
+        .value {
+            width: 3em;
+        }
+
+        .flag {
+            width: 1em;
+            color: rgb(24,137,47);
+            text-align: center;
+        }
+    }
+
+    .disassembly {
+        display: inline-block;
+        vertical-align: top;
+    }
+
+    .row {
+        width: 100%;
+    }
+
+    .addr {
+        box-sizing: border-box;
+        padding: 0 6px;
+        display: inline-block;
+        width: 7ex;
+        text-align: right;
+        cursor: pointer;
+        cursor: hand;
+    }
+
+    .hex {
+        display: inline-block;
+        width: 12ex;
+        background: #DDD;
+    }
+
+    .instruction {
+        padding-left: 1ex;
+    }
+}
